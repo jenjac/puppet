@@ -1,0 +1,65 @@
+{
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Darwin"
+    }
+  ],
+  "name": "rcoleman-mac_profiles_handler",
+  "version": "0.3.0",
+  "source": "git@github.com:ryanycoleman/rcoleman-mac_profiles_handler.git",
+  "author": "ryanycoleman",
+  "license": "Apache",
+  "summary": "Puppet Module for managing OS X Configuration Profiles",
+  "description": "This module provides two resource types for managing configuration profiles.",
+  "project_page": "https://github.com/ryanycoleman/rcoleman-mac_profiles_handler",
+  "dependencies": [
+
+  ],
+  "types": [
+    {
+      "name": "profile_manager",
+      "doc": "Manage Apple Configuration Profiles\nhttp://help.apple.com/profilemanager/mac/10.7/#apd88330954-6FA0-4568-A88E-7F6828E763A7\n\nExample Usage:\n  profile_manager { 'com.puppetlabs.foo':\n    ensure   => present,\n    profile  => '/path/to/profile.mobileconfig',\n  }\n\nThe namevar for this type is the identifier for the profile.\nProfile = path to the profile on the client system.",
+      "properties": [
+        {
+          "name": "ensure",
+          "doc": "The basic property that the resource should be in.\n\nValid values are `present`, `absent`. "
+        }
+      ],
+      "parameters": [
+        {
+          "name": "name",
+          "doc": "\n\n"
+        },
+        {
+          "name": "profile",
+          "doc": "\n\n"
+        }
+      ],
+      "providers": [
+        {
+          "name": "osx",
+          "doc": "Provides management of mobileconfig profiles on OS X.\n\n* Required binaries: `/usr/bin/profiles`.\n* Default for `operatingsystem` == `darwin`."
+        }
+      ]
+    }
+  ],
+  "checksums": {
+    "Modulefile": "bdee6b2f93b29d1c308e7efb9964247a",
+    "README.md": "4cf311c6c7b19d325ff151ce53dfd459",
+    "examples/init.pp": "5319c90cf8186cd300bfca154287d7a2",
+    "lib/facter/profiles.rb": "f66a831f59a7756d2995441184e25c28",
+    "lib/puppet/provider/profile_manager/osx.rb": "48a098b58bf3fdf38f32a0261026fa59",
+    "lib/puppet/type/profile_manager.rb": "578a75ebe7f9972c7f49f8c5d4e1ad43",
+    "manifests/manage.pp": "445e0cb04bfd3538d20a7d3e9c840d49"
+  }
+}
