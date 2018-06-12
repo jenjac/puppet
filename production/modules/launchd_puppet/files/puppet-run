@@ -1,0 +1,21 @@
+#!/bin/sh
+
+cd /etc/puppetlabs/code/environments
+git pull
+
+if [ $? -eq 0 ]; then
+    ## Run Puppet locally using puppet apply
+    /opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/environments/production/manifests/site.pp
+
+    ## Log status of the Puppet run
+    if [ $? -eq 0 ]; then
+        logger -is -t puppet-run "Puppet has run successfully" >> /Library/Logs/puppet-run.log 2>&1
+        exit 0
+    else
+        logger -is -t puppet-run "Puppet has run into an error, please run Puppet manually" >> /Library/Logs/puppet-run.log 2>&1
+        exit 1
+    fi
+else
+    logger -is -t puppet-run "ERROR: Configuration Pull was not Successfull." >> /Library/Logs/puppet-run.log 2>&1
+    exit 1
+fi
